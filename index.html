@@ -16,22 +16,22 @@
 
     <header role="banner">
         <nav role="navigation" aria-label="Main navigation">
-            <div class="logo" aria-label="MyWebsite Home" onclick="window.location.href='index.html'">Guitar Place</div>
+            <div class="logo" aria-label="Guitar Place Home" tabindex="0" role="button" onclick="window.location.href='index.html'" onkeydown="if(event.key==='Enter'||event.key===' '){window.location.href='index.html'}">Guitar Place</div>
 
-            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" type="button">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
             </button>
 
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#home" aria-current="page">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
+            <ul class="nav-links" id="nav-links" role="menubar">
+                <li role="none"><a href="#home" aria-current="page" role="menuitem">Home</a></li>
+                <li role="none"><a href="about.html" role="menuitem">About</a></li>
+                <li role="none"><a href="#services" role="menuitem">Services</a></li>
+                <li role="none"><a href="#contact" role="menuitem">Contact</a></li>
             </ul>
         </nav>
-        <div class="nav-overlay" id="nav-overlay"></div>
+        <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
     </header>
 
     <main id="main" role="main">
