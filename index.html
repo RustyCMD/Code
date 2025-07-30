@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Modern website template with enhanced UI/UX design and accessibility features">
+    <meta name="theme-color" content="#6366f1">
+    <title>Modern Website Template - Enhanced UI/UX</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <header role="banner">
+        <nav role="navigation" aria-label="Main navigation">
+            <div class="logo" aria-label="MyWebsite Home" onclick="window.location.href='index.html'">Guitar Place</div>
+
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home" aria-current="page">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="nav-overlay" id="nav-overlay"></div>
+    </header>
+
+    <main id="main" role="main">
+        <section id="home" class="hero" aria-labelledby="hero-title">
+            <h1 id="hero-title">Welcome to Our Website</h1>
+            <p>Creating amazing digital experiences with modern design and accessibility</p>
+            <button class="btn" onclick="openModal()" aria-describedby="modal-description">
+                Get Started
+            </button>
+            <span id="modal-description" class="sr-only">Opens a welcome modal dialog</span>
+        </section>
+
+        <section id="services" class="section" aria-labelledby="services-title">
+            <div class="container">
+                <h2 id="services-title">Our Services</h2>
+                <p>We provide comprehensive digital solutions to help your business thrive in the modern world.</p>
+                <div class="features" role="list">
+                    <article class="feature" role="listitem">
+                        <h3>🎨 Web Design</h3>
+                        <p>Beautiful, responsive designs that work seamlessly across all devices and screen sizes.</p>
+                    </article>
+                    <article class="feature" role="listitem">
+                        <h3>⚡ Development</h3>
+                        <p>Modern web applications built with cutting-edge technologies and best practices.</p>
+                    </article>
+                    <article class="feature" role="listitem">
+                        <h3>🚀 SEO</h3>
+                        <p>Optimize your website for search engines and achieve better online visibility.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section" aria-labelledby="contact-title">
+            <div class="container">
+                <h2 id="contact-title">Contact Us</h2>
+                <p>Ready to start your project? Get in touch with us today and let's create something amazing together!</p>
+                <button class="btn" onclick="showAlert()" aria-describedby="contact-description">
+                    Send Message
+                </button>
+                <span id="contact-description" class="sr-only">Shows a demo message notification</span>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 MyWebsite. All rights reserved.</p>
+    </footer>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal()" aria-label="Close modal">&times;</button>
+            <h2 id="modal-title">Welcome!</h2>
+            <p id="modal-description">Thank you for your interest. We'll help you create something amazing with our modern, accessible web solutions!</p>
+            <button class="btn" onclick="closeModal()">Get Started</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
