@@ -88,6 +88,8 @@ header {
     z-index: 1000;
     transition: all var(--transition-normal);
     box-shadow: var(--shadow-sm);
+    /* Ensure header doesn't interfere with clicks */
+    pointer-events: auto;
 }
 
 header.scrolled {
@@ -105,6 +107,9 @@ nav {
     margin: 0 auto;
     padding: 0 var(--space-xl);
     position: relative;
+    /* Ensure nav elements are clickable */
+    pointer-events: auto;
+    z-index: 1001;
 }
 
 .logo {
@@ -117,7 +122,15 @@ nav {
     background-clip: text;
     transition: all var(--transition-normal);
     cursor: pointer;
-    z-index: 1001;
+    z-index: 1002;
+    /* Ensure logo is clickable with proper hit area */
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    position: relative;
+    /* Improve click target size */
+    min-height: 44px;
+    display: flex;
+    align-items: center;
 }
 
 .logo:hover {
@@ -130,21 +143,36 @@ nav {
     flex-direction: column;
     cursor: pointer;
     padding: var(--space-sm);
-    z-index: 1001;
+    z-index: 1003;
     background: none;
     border: none;
-    width: 30px;
-    height: 30px;
+    width: 44px;
+    height: 44px;
     position: relative;
+    /* Improve accessibility and click target */
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--radius-sm);
+    transition: background-color var(--transition-fast);
 }
 
 .nav-toggle span {
     width: 25px;
     height: 3px;
     background: white;
-    margin: 3px 0;
+    margin: 2px 0;
     transition: all var(--transition-normal);
     border-radius: 2px;
+    display: block;
+}
+
+.nav-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-toggle:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
 }
 
 .nav-toggle.active span:nth-child(1) {
@@ -166,6 +194,9 @@ nav {
     align-items: center;
     margin: 0;
     padding: 0;
+    /* Ensure nav links are above other elements */
+    z-index: 1002;
+    position: relative;
 }
 
 .nav-links a {
@@ -178,6 +209,14 @@ nav {
     position: relative;
     overflow: hidden;
     white-space: nowrap;
+    /* Improve click target size and ensure clickability */
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Ensure links are clickable */
+    pointer-events: auto;
+    z-index: 1003;
 }
 
 .nav-links a[aria-current="page"] {
@@ -878,11 +917,14 @@ button:focus,
         gap: var(--space-2xl);
         transition: right var(--transition-normal);
         box-shadow: var(--shadow-xl);
-        z-index: 1000;
+        z-index: 1001;
+        /* Ensure mobile nav doesn't interfere when closed */
+        pointer-events: none;
     }
 
     .nav-links.active {
         right: 0;
+        pointer-events: auto;
     }
 
     .nav-links a {
@@ -912,11 +954,14 @@ button:focus,
         opacity: 0;
         visibility: hidden;
         transition: all var(--transition-normal);
+        /* Ensure overlay doesn't interfere when inactive */
+        pointer-events: none;
     }
 
     .nav-overlay.active {
         opacity: 1;
         visibility: visible;
+        pointer-events: auto;
     }
 
     .hero {
@@ -985,13 +1030,27 @@ button:focus,
 
     .nav-overlay {
         display: none !important;
+        pointer-events: none !important;
+    }
+
+    /* Ensure desktop nav is always clickable */
+    .nav-links {
+        pointer-events: auto !important;
+        position: static !important;
+        background: none !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        width: auto !important;
+        height: auto !important;
+        flex-direction: row !important;
+        justify-content: flex-end !important;
     }
 }
 
 /* Smooth transitions for all navigation states */
 .nav-links li {
     opacity: 0;
-    transform: translateX(20px);
+    transform: translateX(10px);
     transition: all var(--transition-normal);
 }
 
@@ -1022,6 +1081,48 @@ button:focus,
     .feature {
         border: 2px solid var(--gray-800);
     }
+}
+
+/* Touch interaction improvements */
+.nav-links a.touch-active {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(0.98);
+}
+
+.nav-links a[data-focused="true"] {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Improve click targets for better accessibility */
+@media (pointer: coarse) {
+    .nav-links a {
+        min-height: 48px;
+        padding: var(--space-md) var(--space-lg);
+    }
+
+    .nav-toggle {
+        min-width: 48px;
+        min-height: 48px;
+    }
+
+    .logo {
+        min-height: 48px;
+        padding: var(--space-sm) var(--space-md);
+    }
+}
+
+/* Ensure navigation elements are always clickable */
+.nav-links,
+.nav-links *,
+.logo,
+.nav-toggle {
+    pointer-events: auto !important;
+}
+
+/* Fix any potential z-index stacking issues */
+header * {
+    position: relative;
 }
 
 /* Reduced motion support */
