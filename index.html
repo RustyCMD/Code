@@ -65,6 +65,578 @@
             </div>
         </section>
 
+        <section id="guitar-builder" class="section" aria-labelledby="builder-title">
+            <div class="container">
+                <h2 id="builder-title">Build Your Own Guitar</h2>
+                <p>Design your perfect instrument with our interactive guitar builder. Customize every aspect and see your creation come to life!</p>
+
+                <div class="guitar-builder-card">
+                    <!-- Progress Indicator -->
+                    <div class="builder-progress">
+                        <div class="progress-steps">
+                            <div class="progress-step active" data-step="1">
+                                <div class="step-number">1</div>
+                                <div class="step-label">Type</div>
+                            </div>
+                            <div class="progress-step" data-step="2">
+                                <div class="step-number">2</div>
+                                <div class="step-label">Shape</div>
+                            </div>
+                            <div class="progress-step" data-step="3">
+                                <div class="step-number">3</div>
+                                <div class="step-label">Materials</div>
+                            </div>
+                            <div class="progress-step" data-step="4">
+                                <div class="step-number">4</div>
+                                <div class="step-label">Electronics</div>
+                            </div>
+                            <div class="progress-step" data-step="5">
+                                <div class="step-number">5</div>
+                                <div class="step-label">Finish</div>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                    </div>
+
+                    <div class="builder-content">
+                        <div class="guitar-preview">
+                            <div class="preview-controls">
+                                <button class="view-btn active" data-view="front" aria-label="Front view">Front</button>
+                                <button class="view-btn" data-view="back" aria-label="Back view">Back</button>
+                                <button class="view-btn" data-view="side" aria-label="Side view">Side</button>
+                            </div>
+
+                            <div class="guitar-viewport" id="guitar-viewport">
+                                <div class="guitar-container" id="guitar-container">
+                                    <svg viewBox="0 0 200 600" class="guitar-svg" aria-label="Interactive guitar preview">
+                                        <!-- Simplified definitions -->
+                                        <defs>
+                                            <!-- Simple gradients for depth -->
+                                            <linearGradient id="body-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                <stop offset="0%" style="stop-color:#f0f0f0"/>
+                                                <stop offset="100%" style="stop-color:#d0d0d0"/>
+                                            </linearGradient>
+
+                                            <linearGradient id="neck-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                <stop offset="0%" style="stop-color:#e8e8e8"/>
+                                                <stop offset="100%" style="stop-color:#c8c8c8"/>
+                                            </linearGradient>
+
+                                            <!-- Simple shadow -->
+                                            <filter id="simple-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                                                <feDropShadow dx="2" dy="4" stdDeviation="3" flood-opacity="0.2"/>
+                                            </filter>
+                                        </defs>
+
+                                        <!-- Simplified Guitar Body -->
+                                        <g id="guitar-body-group" filter="url(#simple-shadow)">
+                                            <!-- Electric Guitar Body -->
+                                            <g id="electric-body" class="body-type">
+                                                <!-- Main body shape - simplified -->
+                                                <path id="guitar-body"
+                                                      d="M100 200
+                                                         C80 200 60 220 60 250
+                                                         L60 450
+                                                         C60 480 80 500 100 500
+                                                         L140 500
+                                                         C160 500 180 480 180 450
+                                                         L180 250
+                                                         C180 220 160 200 140 200
+                                                         Z"
+                                                      fill="#DEB887"
+                                                      stroke="#CD853F"
+                                                      stroke-width="2"/>
+
+                                                <!-- Simple pickguard -->
+                                                <rect x="70" y="220" width="50" height="200" rx="10"
+                                                      fill="#f8f9fa"
+                                                      stroke="#e0e0e0"
+                                                      stroke-width="1"
+                                                      opacity="0.8"/>
+                                            </g>
+
+                                            <!-- Acoustic Guitar Body -->
+                                            <g id="acoustic-body" class="body-type" style="display: none;">
+                                                <!-- Main body - simple ellipse -->
+                                                <ellipse cx="120" cy="350" rx="60" ry="100"
+                                                    fill="#DEB887"
+                                                    stroke="#CD853F"
+                                                    stroke-width="2"/>
+
+                                                <!-- Sound hole -->
+                                                <circle cx="120" cy="320" r="20"
+                                                    fill="#2c2c2c"
+                                                    stroke="#8B4513"
+                                                    stroke-width="2"/>
+                                            </g>
+
+                                            <!-- Bass Guitar Body -->
+                                            <g id="bass-body" class="body-type" style="display: none;">
+                                                <!-- Main body - larger rectangle -->
+                                                <rect x="50" y="200" width="140" height="300" rx="20"
+                                                    fill="#8B4513"
+                                                    stroke="#654321"
+                                                    stroke-width="2"/>
+                                            </g>
+                                        </g>
+
+                                        <!-- Simplified Guitar Neck -->
+                                        <g id="guitar-neck-group">
+                                            <!-- Neck -->
+                                            <rect id="guitar-neck"
+                                                  x="105" y="50"
+                                                  width="30" height="150"
+                                                  fill="#FFEBCD"
+                                                  stroke="#DEB887"
+                                                  stroke-width="2"/>
+
+                                            <!-- Fretboard -->
+                                            <rect id="fretboard"
+                                                  x="107" y="50"
+                                                  width="26" height="150"
+                                                  fill="#3c2415"
+                                                  opacity="0.8"/>
+
+                                            <!-- Simplified frets (every few frets) -->
+                                            <g id="frets">
+                                                <line x1="107" y1="70" x2="133" y2="70" stroke="#c0c0c0" stroke-width="1"/>
+                                                <line x1="107" y1="90" x2="133" y2="90" stroke="#c0c0c0" stroke-width="1"/>
+                                                <line x1="107" y1="110" x2="133" y2="110" stroke="#c0c0c0" stroke-width="1"/>
+                                                <line x1="107" y1="130" x2="133" y2="130" stroke="#c0c0c0" stroke-width="1"/>
+                                                <line x1="107" y1="150" x2="133" y2="150" stroke="#c0c0c0" stroke-width="1"/>
+                                                <line x1="107" y1="170" x2="133" y2="170" stroke="#c0c0c0" stroke-width="1"/>
+                                                <line x1="107" y1="190" x2="133" y2="190" stroke="#c0c0c0" stroke-width="1"/>
+                                            </g>
+
+                                            <!-- Position markers -->
+                                            <circle cx="120" cy="90" r="2" fill="#f0f0f0" opacity="0.8"/>
+                                            <circle cx="120" cy="130" r="2" fill="#f0f0f0" opacity="0.8"/>
+                                            <circle cx="120" cy="170" r="2" fill="#f0f0f0" opacity="0.8"/>
+                                        </g>
+
+                                        <!-- Simplified Guitar Headstock -->
+                                        <g id="guitar-headstock-group">
+                                            <!-- Headstock shape -->
+                                            <rect id="guitar-headstock"
+                                                  x="100" y="20"
+                                                  width="40" height="30"
+                                                  fill="#FFEBCD"
+                                                  stroke="#DEB887"
+                                                  stroke-width="2"/>
+
+                                            <!-- Tuning pegs -->
+                                            <g id="tuning-pegs">
+                                                <!-- Left side tuning pegs -->
+                                                <circle cx="90" cy="28" r="3" fill="#c0c0c0" stroke="#999" stroke-width="1"/>
+                                                <circle cx="90" cy="35" r="3" fill="#c0c0c0" stroke="#999" stroke-width="1"/>
+                                                <circle cx="90" cy="42" r="3" fill="#c0c0c0" stroke="#999" stroke-width="1"/>
+
+                                                <!-- Right side tuning pegs -->
+                                                <circle cx="150" cy="28" r="3" fill="#c0c0c0" stroke="#999" stroke-width="1"/>
+                                                <circle cx="150" cy="35" r="3" fill="#c0c0c0" stroke="#999" stroke-width="1"/>
+                                                <circle cx="150" cy="42" r="3" fill="#c0c0c0" stroke="#999" stroke-width="1"/>
+                                            </g>
+                                        </g>
+
+                                        <!-- Simplified Guitar Strings -->
+                                        <g id="guitar-strings">
+                                            <line x1="110" y1="50" x2="110" y2="500" stroke="#e8e8e8" stroke-width="1" opacity="0.8"/>
+                                            <line x1="115" y1="50" x2="115" y2="500" stroke="#e8e8e8" stroke-width="1" opacity="0.8"/>
+                                            <line x1="120" y1="50" x2="120" y2="500" stroke="#e8e8e8" stroke-width="1" opacity="0.8"/>
+                                            <line x1="125" y1="50" x2="125" y2="500" stroke="#e8e8e8" stroke-width="1" opacity="0.8"/>
+                                            <line x1="130" y1="50" x2="130" y2="500" stroke="#e8e8e8" stroke-width="1" opacity="0.8"/>
+                                            <line x1="135" y1="50" x2="135" y2="500" stroke="#e8e8e8" stroke-width="1" opacity="0.8"/>
+                                        </g>
+
+                                        <!-- Simplified Pickups (for electric guitars) -->
+                                        <g id="pickups" class="electric-only">
+                                            <!-- Neck pickup -->
+                                            <rect x="80" y="260" width="40" height="12" rx="6"
+                                                  fill="#2c2c2c" stroke="#1a1a1a" stroke-width="1"/>
+
+                                            <!-- Bridge pickup -->
+                                            <rect x="80" y="320" width="40" height="12" rx="6"
+                                                  fill="#2c2c2c" stroke="#1a1a1a" stroke-width="1"/>
+                                        </g>
+
+                                        <!-- Simplified Bridge -->
+                                        <g id="bridge-group">
+                                            <rect x="90" y="480" width="60" height="15" rx="3"
+                                                  fill="#c0c0c0" stroke="#999" stroke-width="1"/>
+                                        </g>
+
+                                        <!-- Simplified Controls (for electric guitars) -->
+                                        <g id="controls" class="electric-only">
+                                            <!-- Volume knob -->
+                                            <circle cx="150" cy="300" r="8" fill="#c0c0c0" stroke="#999" stroke-width="1"/>
+                                            <circle cx="150" cy="300" r="3" fill="#666"/>
+
+                                            <!-- Tone knob -->
+                                            <circle cx="150" cy="330" r="8" fill="#c0c0c0" stroke="#999" stroke-width="1"/>
+                                            <circle cx="150" cy="330" r="3" fill="#666"/>
+                                        </g>
+                                    </svg>
+                                </div>
+
+                                <!-- Guitar rotation controls -->
+                                <div class="rotation-controls">
+                                    <button class="rotate-btn" data-rotation="left" aria-label="Rotate left">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M7.11 8.53L5.7 7.11C4.8 8.27 4.24 9.61 4.07 11h2.02c.14-.87.49-1.72 1.02-2.47zM6.09 13H4.07c.17 1.39.72 2.73 1.62 3.89l1.41-1.42c-.52-.75-.87-1.59-1.01-2.47zm1.01 5.32c1.16.9 2.51 1.44 3.9 1.61V17.91c-.87-.15-1.71-.49-2.46-1.03L7.1 18.32zM13 4.07V1L8.45 5.55 13 10V6.09c2.84.48 5 2.94 5 5.91s-2.16 5.43-5 5.91v2.02c3.95-.49 7-3.85 7-7.93s-3.05-7.44-7-7.93z"/>
+                                        </svg>
+                                    </button>
+                                    <button class="rotate-btn" data-rotation="right" aria-label="Rotate right">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M15.55 5.55L11 1v3.07C7.06 4.56 4 7.92 4 12s3.05 7.44 7 7.93v-2.02c-2.84-.48-5-2.94-5-5.91s2.16-5.43 5-5.91V10l4.55-4.45zM19.93 11c-.17-1.39-.72-2.73-1.62-3.89l-1.42 1.42c.54.75.88 1.6 1.02 2.47h2.02zM13 17.9v2.02c1.39-.17 2.74-.71 3.9-1.61l-1.44-1.44c-.75.54-1.59.89-2.46 1.03zm3.89-2.42l1.42 1.41c.9-1.16 1.45-2.5 1.62-3.89h-2.02c-.14.87-.48 1.72-1.02 2.48z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="guitar-info">
+                                <h3 id="guitar-name">Custom Guitar</h3>
+                                <div class="guitar-specs">
+                                    <div class="spec-item">
+                                        <span class="spec-label">Type:</span>
+                                        <span id="spec-type">Electric</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-label">Strings:</span>
+                                        <span id="spec-strings">6-String</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-label">Body:</span>
+                                        <span id="spec-body">Stratocaster</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-label">Wood:</span>
+                                        <span id="spec-wood">Alder</span>
+                                    </div>
+                                </div>
+                                <div class="price-display">
+                                    <span class="price-label">Estimated Price:</span>
+                                    <span class="price-amount" id="price-amount">$1,299</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="builder-controls">
+                            <!-- Step 1: Guitar Type -->
+                            <div class="control-section" data-step="1">
+                                <h3 class="section-title">
+                                    <span class="step-icon">🎸</span>
+                                    Choose Your Guitar Type
+                                    <button class="help-btn" data-tooltip="Different guitar types produce different sounds and are suited for different musical styles" aria-label="Help about guitar types">?</button>
+                                </h3>
+
+                                <div class="image-selector" id="guitar-type-selector">
+                                    <div class="selector-option active" data-value="electric">
+                                        <div class="option-image">⚡</div>
+                                        <div class="option-label">Electric</div>
+                                        <div class="option-description">Amplified, versatile</div>
+                                    </div>
+                                    <div class="selector-option" data-value="acoustic">
+                                        <div class="option-image">🎸</div>
+                                        <div class="option-label">Acoustic</div>
+                                        <div class="option-description">Natural, warm tone</div>
+                                    </div>
+                                    <div class="selector-option" data-value="classical">
+                                        <div class="option-image">🎼</div>
+                                        <div class="option-label">Classical</div>
+                                        <div class="option-description">Nylon strings, gentle</div>
+                                    </div>
+                                    <div class="selector-option" data-value="bass">
+                                        <div class="option-image">🎵</div>
+                                        <div class="option-label">Bass</div>
+                                        <div class="option-description">Deep, rhythmic foundation</div>
+                                    </div>
+                                </div>
+
+                                <div class="genre-recommendations">
+                                    <h4>Recommended for:</h4>
+                                    <div class="genre-tags" id="genre-tags">
+                                        <span class="genre-tag">Rock</span>
+                                        <span class="genre-tag">Blues</span>
+                                        <span class="genre-tag">Jazz</span>
+                                        <span class="genre-tag">Metal</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Body Shape -->
+                            <div class="control-section" data-step="2" style="display: none;">
+                                <h3 class="section-title">
+                                    <span class="step-icon">🏗️</span>
+                                    Select Body Shape
+                                    <button class="help-btn" data-tooltip="Body shape affects tone, comfort, and appearance" aria-label="Help about body shapes">?</button>
+                                </h3>
+
+                                <div class="shape-grid" id="body-shape-selector">
+                                    <!-- Will be populated dynamically -->
+                                </div>
+
+                                <div class="shape-info" id="shape-info">
+                                    <h4>Shape Characteristics:</h4>
+                                    <ul id="shape-features">
+                                        <li>Versatile tone suitable for many genres</li>
+                                        <li>Comfortable body contours</li>
+                                        <li>Classic design with modern playability</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Materials -->
+                            <div class="control-section" data-step="3" style="display: none;">
+                                <h3 class="section-title">
+                                    <span class="step-icon">🌳</span>
+                                    Choose Materials
+                                    <button class="help-btn" data-tooltip="Different woods affect tone, weight, and appearance" aria-label="Help about wood types">?</button>
+                                </h3>
+
+                                <div class="material-selector">
+                                    <div class="material-category">
+                                        <h4>Body Wood</h4>
+                                        <div class="wood-options" id="wood-selector">
+                                            <!-- Will be populated dynamically -->
+                                        </div>
+                                    </div>
+
+                                    <div class="material-category">
+                                        <h4>Neck Wood</h4>
+                                        <div class="wood-options" id="neck-wood-selector">
+                                            <div class="wood-option active" data-value="maple">
+                                                <div class="wood-sample maple"></div>
+                                                <span>Maple</span>
+                                                <small>Bright, snappy tone</small>
+                                            </div>
+                                            <div class="wood-option" data-value="mahogany">
+                                                <div class="wood-sample mahogany"></div>
+                                                <span>Mahogany</span>
+                                                <small>Warm, rich tone</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tone-description" id="tone-description">
+                                    <h4>Tonal Characteristics:</h4>
+                                    <div class="tone-bars">
+                                        <div class="tone-bar">
+                                            <span>Brightness</span>
+                                            <div class="bar"><div class="fill" style="width: 70%"></div></div>
+                                        </div>
+                                        <div class="tone-bar">
+                                            <span>Warmth</span>
+                                            <div class="bar"><div class="fill" style="width: 60%"></div></div>
+                                        </div>
+                                        <div class="tone-bar">
+                                            <span>Sustain</span>
+                                            <div class="bar"><div class="fill" style="width: 80%"></div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 4: Electronics & Strings -->
+                            <div class="control-section" data-step="4" style="display: none;">
+                                <h3 class="section-title">
+                                    <span class="step-icon">🔌</span>
+                                    Electronics & Strings
+                                    <button class="help-btn" data-tooltip="Pickups and string configuration determine your guitar's voice and range" aria-label="Help about electronics">?</button>
+                                </h3>
+
+                                <div class="electronics-grid">
+                                    <div class="control-group">
+                                        <h4>String Configuration</h4>
+                                        <div class="string-selector" id="string-selector">
+                                            <!-- Will be populated dynamically -->
+                                        </div>
+                                        <div class="tuning-display" id="tuning-display">
+                                            <span class="tuning-label">Standard Tuning:</span>
+                                            <span class="tuning-notes">E-A-D-G-B-E</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group" id="pickup-section">
+                                        <h4>Pickup Configuration</h4>
+                                        <div class="pickup-selector" id="pickup-selector">
+                                            <!-- Will be populated dynamically -->
+                                        </div>
+                                        <div class="pickup-description" id="pickup-description">
+                                            <p>Single-coil pickups provide bright, clear tones with excellent note definition.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="sound-preview">
+                                    <h4>Sound Character</h4>
+                                    <div class="sound-tags" id="sound-tags">
+                                        <span class="sound-tag">Bright</span>
+                                        <span class="sound-tag">Clear</span>
+                                        <span class="sound-tag">Articulate</span>
+                                    </div>
+                                    <button class="play-sample-btn" id="play-sample" aria-label="Play sound sample">
+                                        🔊 Play Sample
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Step 5: Hardware & Finish -->
+                            <div class="control-section" data-step="5" style="display: none;">
+                                <h3 class="section-title">
+                                    <span class="step-icon">✨</span>
+                                    Hardware & Finish
+                                    <button class="help-btn" data-tooltip="Hardware affects both appearance and functionality" aria-label="Help about hardware">?</button>
+                                </h3>
+
+                                <div class="hardware-grid">
+                                    <div class="hardware-category">
+                                        <h4>Hardware Finish</h4>
+                                        <div class="hardware-selector" id="hardware-selector">
+                                            <div class="hardware-option active" data-value="chrome">
+                                                <div class="hardware-sample chrome"></div>
+                                                <span>Chrome</span>
+                                                <small>Classic, bright finish</small>
+                                            </div>
+                                            <div class="hardware-option" data-value="gold">
+                                                <div class="hardware-sample gold"></div>
+                                                <span>Gold</span>
+                                                <small>Vintage, warm appearance</small>
+                                            </div>
+                                            <div class="hardware-option" data-value="black">
+                                                <div class="hardware-sample black"></div>
+                                                <span>Black</span>
+                                                <small>Modern, sleek look</small>
+                                            </div>
+                                            <div class="hardware-option" data-value="vintage">
+                                                <div class="hardware-sample vintage"></div>
+                                                <span>Vintage</span>
+                                                <small>Aged, authentic feel</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="hardware-category">
+                                        <h4>Bridge Type</h4>
+                                        <div class="bridge-selector" id="bridge-selector">
+                                            <div class="bridge-option active" data-value="tremolo">
+                                                <span>Tremolo</span>
+                                                <small>Vibrato effects</small>
+                                            </div>
+                                            <div class="bridge-option" data-value="fixed">
+                                                <span>Fixed</span>
+                                                <small>Maximum sustain</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="finish-options">
+                                    <h4>Body Finish</h4>
+                                    <div class="finish-selector" id="finish-selector">
+                                        <div class="finish-option active" data-value="gloss">
+                                            <div class="finish-sample gloss"></div>
+                                            <span>Gloss</span>
+                                        </div>
+                                        <div class="finish-option" data-value="satin">
+                                            <div class="finish-sample satin"></div>
+                                            <span>Satin</span>
+                                        </div>
+                                        <div class="finish-option" data-value="matte">
+                                            <div class="finish-sample matte"></div>
+                                            <span>Matte</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Controls -->
+                        <div class="step-navigation">
+                            <button class="nav-btn prev-btn" id="prev-step" disabled aria-label="Previous step">
+                                ← Previous
+                            </button>
+                            <button class="nav-btn next-btn" id="next-step" aria-label="Next step">
+                                Next →
+                            </button>
+                        </div>
+
+                        <!-- Configuration Summary -->
+                        <div class="config-summary" id="config-summary" style="display: none;">
+                            <h3>Your Custom Guitar</h3>
+                            <div class="summary-grid">
+                                <div class="summary-item">
+                                    <span class="summary-label">Type:</span>
+                                    <span class="summary-value" id="summary-type">Electric Guitar</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Body:</span>
+                                    <span class="summary-value" id="summary-body">Stratocaster</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Wood:</span>
+                                    <span class="summary-value" id="summary-wood">Alder</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Strings:</span>
+                                    <span class="summary-value" id="summary-strings">6-String</span>
+                                </div>
+                            </div>
+
+                            <div class="final-price">
+                                <span class="price-label">Total Price:</span>
+                                <span class="price-value" id="final-price">$1,299</span>
+                            </div>
+                        </div>
+
+                        <!-- Enhanced Actions -->
+                        <div class="builder-actions">
+                            <div class="action-group primary-actions">
+                                <button class="btn btn-secondary" id="reset-builder" aria-label="Reset guitar configuration to default">
+                                    🔄 Reset
+                                </button>
+                                <button class="btn btn-primary" id="save-config" aria-label="Save current guitar configuration">
+                                    💾 Save Config
+                                </button>
+                                <button class="btn btn-accent" id="get-quote" aria-label="Get a quote for this guitar configuration">
+                                    💰 Get Quote
+                                </button>
+                            </div>
+
+                            <div class="action-group secondary-actions">
+                                <button class="btn btn-outline" id="compare-configs" aria-label="Compare with saved configurations">
+                                    📊 Compare
+                                </button>
+                                <button class="btn btn-outline" id="share-config" aria-label="Share this configuration">
+                                    📤 Share
+                                </button>
+                                <button class="btn btn-outline" id="download-specs" aria-label="Download specification sheet">
+                                    📄 Download Specs
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Comparison Panel -->
+                        <div class="comparison-panel" id="comparison-panel" style="display: none;">
+                            <h3>Configuration Comparison</h3>
+                            <div class="comparison-grid" id="comparison-grid">
+                                <!-- Will be populated with saved configurations -->
+                            </div>
+                            <button class="close-comparison" id="close-comparison" aria-label="Close comparison panel">×</button>
+                        </div>
+
+                        <!-- Tooltips -->
+                        <div class="tooltip" id="tooltip" role="tooltip" aria-hidden="true">
+                            <div class="tooltip-content"></div>
+                            <div class="tooltip-arrow"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="contact" class="section" aria-labelledby="contact-title">
             <div class="container">
                 <h2 id="contact-title">Contact Us</h2>
